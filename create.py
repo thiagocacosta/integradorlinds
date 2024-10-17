@@ -1,32 +1,32 @@
-from date.conectar import cursor, conexao
-
-def inserir_sensor(tipo, mac, lat, long, loc, resp, status, obs, unid):
-    try:
-        inserir_sensor = f"""INSERT INTO api_produto(tituloProduto, preco, descricao, imgProduto, catProduto, classProduto, exibirHome)
-        values
-        ('{tituloProduto}', '{preco}', '{descricao}', '{imgProduto}', '{catProduto}', '{classProduto}', '{exibirHome}');"""
-        cursor.execute(inserir_sensor)
-        conexao.commit()
-    except:
-        print('Erro ao adicionar os sensor...')
-    
-
-inserir_sensor("Optico", 0, -22.913075, -22.913075, 'LAB 500', 'Lindomar', 1, 'Sensor de teste', 'x')
-
-
-
-import pandas as pd
+import sqlite3
 import os
 
-# Criando dados de exemplo para as ferramentas caseiras
-data = {"}
+# A função de conexão com o banco de dados
+def conectar():
+    return sqlite3.connect('db.sqlite3')
 
-# Criando um DataFrame com os dados
-df = pd.DataFrame(data)
-
-
+# Obtenha o caminho atual
 caminho_atual = os.getcwd()
 c = caminho_atual.replace("\\", "/")
 
-# Salvando o DataFrame em um arquivo CSV
-df.to_csv(c+"/date/ferramentas.csv", index=False)
+# Estabelecendo conexão e criando cursor
+conexao = conectar()
+cursor = conexao.cursor()
+
+def inserir_sensor(tituloProduto, preco, descricao, imgProduto, catProduto, classProduto, exibirHome):
+    try:
+        if conexao:  # Verifica se a conexão está aberta
+            inserir_sensor = f"""INSERT INTO api_produto(tituloProduto, preco, descricao, imgProduto, catProduto, classProduto, exibirHome)
+            values
+            ('{tituloProduto}', '{preco}', '{descricao}', '{imgProduto}', '{catProduto}', '{classProduto}', '{exibirHome}');"""
+            cursor.execute(inserir_sensor)
+            conexao.commit()
+        else:
+            print("Erro: Conexão com o banco de dados está fechada.")
+    except Exception as e:
+        print('Erro ao adicionar o sensor:', e)
+
+inserir_sensor("lapis", 1, 'lapis de cor', c+'/images', '56556', 'livre', True)
+
+# Fechando a conexão ao final (se não for usada mais)
+conexao.close()

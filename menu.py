@@ -1,3 +1,5 @@
+import subprocess
+
 def menu():
     while True:
         print('\n'
@@ -10,13 +12,13 @@ def menu():
         op = int(input('Escolha a opção: '))
         match op:
             case 1:
-                print('1')
+                subprocess.run(["python", "create.py"])  # Substitua 'create.py' pelo nome do seu arquivo
             case 2:
-                print('2')
+                subprocess.run(["python", "read.py"])  # Substitua 'read.py' pelo nome do seu arquivo
             case 3:
-                print('3')
+                subprocess.run(["python", "update.py"])  # Substitua 'update.py' pelo nome do seu arquivo
             case 4:
-                print('4')
+                subprocess.run(["python", "delete.py"])  # Substitua 'delete.py' pelo nome do seu arquivo
             case 5:
                 break
             
