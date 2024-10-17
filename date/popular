@@ -1,0 +1,43 @@
+import pandas as pd
+import sqlite3
+
+# Conectando ao banco de dados SQLite
+conn = sqlite3.connect('db.sqlite3')
+
+# #capturando o local atual
+# caminho_atual = os.getcwd()
+# c = caminho_atual.replace("\\", "/")
+
+# # Lendo o arquivo CSV para um DataFrame
+# df = pd.read_csv(c+"/date/ferramentas.csv")
+
+# Lendo o arquivo CSV para um DataFrame
+df = pd.read_csv('C:/Users/sn1021328/Documents/1DS-TB-12-A/date/ferramentas.csv')
+
+# Renomeando colunas se necessário (opcional)
+df.columns = [
+    'tituloProduto', 'preco', 'descricao', 'imgProduto', 
+    'catProduto', 'classProduto', 'exibirHome'
+]
+
+# Criando a tabela no banco de dados se ela não existir
+conn.execute('''
+CREATE TABLE IF NOT EXISTS api_produto (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tituloProduto TEXT,
+    preco REAL,
+    descricao TEXT,
+    imgProduto TEXT,
+    catProduto TEXT,
+    classProduto TEXT,
+    exibirHome BOOLEAN
+)
+''')
+
+# Inserindo os dados do DataFrame na tabela
+df.to_sql('api_produto', conn, if_exists='append', index=False)
+
+# Fechando a conexão com o banco de dados
+conn.close()
+
+print("Dados inseridos com sucesso na tabela api_produto.")
