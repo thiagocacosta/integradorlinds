@@ -1,18 +1,16 @@
 import pandas as pd
 import sqlite3
+import os
 
 # Conectando ao banco de dados SQLite
 conn = sqlite3.connect('db.sqlite3')
 
-# #capturando o local atual
-# caminho_atual = os.getcwd()
-# c = caminho_atual.replace("\\", "/")
-
-# # Lendo o arquivo CSV para um DataFrame
-# df = pd.read_csv(c+"/date/ferramentas.csv")
+#capturando o local atual
+caminho_atual = os.getcwd()
+c = caminho_atual.replace("\\", "/")
 
 # Lendo o arquivo CSV para um DataFrame
-df = pd.read_csv('C:/Users/sn1021328/Documents/1DS-TB-12-A/date/ferramentas.csv')
+df = pd.read_csv(c+"/date/ferramentas.csv")
 
 # Renomeando colunas se necessário (opcional)
 df.columns = [
