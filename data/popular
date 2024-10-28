@@ -10,7 +10,7 @@ caminho_atual = os.getcwd()
 c = caminho_atual.replace("\\", "/")
 
 # Lendo o arquivo CSV para um DataFrame
-df = pd.read_csv(c+"/date/ferramentas.csv")
+df = pd.read_csv(c+"/data/ferramentas.csv")
 
 # Renomeando colunas se necessário (opcional)
 df.columns = [

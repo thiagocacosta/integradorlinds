@@ -136,4 +136,4 @@ caminho_atual = os.getcwd()
 c = caminho_atual.replace("\\", "/")
 
 # Salvando o DataFrame em um arquivo CSV
-df.to_csv(c+"/date/ferramentas.csv", index=False)
+df.to_csv(c+"/data/ferramentas.csv", index=False)

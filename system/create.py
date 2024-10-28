@@ -1,21 +1,18 @@
 import sqlite3
 import os
 
-# A função de conexão com o banco de dados
 def conectar():
     return sqlite3.connect('db.sqlite3')
 
-# Obtenha o caminho atual
 caminho_atual = os.getcwd()
 c = caminho_atual.replace("\\", "/")
 
-# Estabelecendo conexão e criando cursor
 conexao = conectar()
 cursor = conexao.cursor()
 
 def inserir_sensor(tituloProduto, preco, descricao, imgProduto, catProduto, classProduto, exibirHome):
     try:
-        if conexao:  # Verifica se a conexão está aberta
+        if conexao:  
             inserir_sensor = f"""INSERT INTO api_produto(tituloProduto, preco, descricao, imgProduto, catProduto, classProduto, exibirHome)
             values
             ('{tituloProduto}', '{preco}', '{descricao}', '{imgProduto}', '{catProduto}', '{classProduto}', '{exibirHome}');"""
@@ -28,5 +25,5 @@ def inserir_sensor(tituloProduto, preco, descricao, imgProduto, catProduto, clas
 
 inserir_sensor("lapis", 1, 'lapis de cor', c+'/images', '56556', 'livre', True)
 
-# Fechando a conexão ao final (se não for usada mais)
+
 conexao.close()
